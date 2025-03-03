@@ -4,7 +4,7 @@ import subprocess
 app = Flask(__name__)
 
 # The command to be added/removed in crontab
-cron_command = "/usr/bin/python3 /home/all_modules/module9/cron1.py 2>&1"
+cron_command = "/usr/bin/python3 /home/abhay/latest_firewall/firewall_backend/module9/cron1.py 2>&1"
 cron_schedule = "*/5 * * * *"  # Example: runs every hour, modify as needed
 cron_job = f"{cron_schedule} {cron_command}"
 

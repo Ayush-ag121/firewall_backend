@@ -1,0 +1,31 @@
+import subprocess
+
+def execute_command(command):
+    try:
+        result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Command '{command}' failed with exit code {e.returncode}")
+        print(f"Error output: {e.stderr.strip()}")
+        return None
+
+
+def enable_module4_second():
+    command = "sudo ufw enable"
+    output = execute_command(command)
+    return output
+
+def disable_module4_second():
+    command = "sudo ufw disable"
+    output = execute_command(command)
+    return output
+    
+choice = int(input("Enable '1' & Disable '0': "))
+if choice == 1:
+    out1 = enable_module4_second()
+    print(out1.upper())
+elif choice == 0:
+    out2 = disable_module4_second()
+    print(out2.upper())
+else:
+    print("[-] Input Error!!!")

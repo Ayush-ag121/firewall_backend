@@ -1,0 +1,33 @@
+import subprocess
+# module 4
+def execute_command(command):
+    try:
+        result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Command '{command}' failed with exit code {e.returncode}")
+        print(f"Error output: {e.stderr.strip()}")
+        return None
+
+
+def default_deny_module4_first():
+    command = "sudo ufw default deny incoming"
+    output = execute_command(command)
+    if output:
+        first_line = output.split('\n')[0]
+        return first_line
+    return []
+
+def default_allow_module4_first():
+    command = "sudo ufw default allow outgoing"
+    output = execute_command(command)
+    if output:
+        first_line = output.split('\n')[0]
+        return first_line
+    return []
+    
+
+out1 = default_deny_module4_first()
+out2 = default_allow_module4_first()
+print("Default Configuration:\n")
+print(f"{out1}\n{out2}")
